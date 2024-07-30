@@ -8,6 +8,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// generator custom_generator {
+//   provider = "prisma-generator-fake-data"
+//   output   = "../src/script/seed-data.ts"
+// }
+
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
@@ -45,4 +50,37 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([provider, providerAccountId])
+}
+
+model FlightStatus {
+  id String @id @default(cuid())
+
+  arrivalPlace           String
+  departurePlace         String
+  arrivalGate            String
+  departureGate          String
+  status                 String
+  arrivalTime            DateTime
+  departureTime          DateTime
+  scheduledDepartureTime DateTime
+  scheduledArrivalTime   DateTime
+
+  flight Flight @relation(fields: [fId], references: [id])
+  fId    String @unique
+}
+
+enum Status {
+  OnTime
+  Delayed
+  Arrived
+  Cancelled
+}
+
+model Flight {
+  id       String  @id @default(cuid())
+  modal    String?
+  airline  String  @default("Indigo")
+  flightId String  @unique
+
+  FlightStatus FlightStatus?
 }

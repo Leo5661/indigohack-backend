@@ -14,6 +14,7 @@
     "db:migrate": "pnpm exec prisma migrate dev --name '${npm_config_name}'",
     "db:gen": "pnpm exec prisma generate",
     "db:push": "pnpm exec prisma db push",
+    "db:seed": "ts-node src/script/seed.ts",
     "db:ui": "pnpm exec prisma studio"
   },
   "devDependencies": {
@@ -40,6 +41,7 @@
     "nodemon": "^3.1.4",
     "prettier": "3.3.3",
     "prisma": "^5.17.0",
+    "prisma-generator-fake-data": "^0.14.2",
     "rimraf": "^6.0.1",
     "supertest": "^6.3.3",
     "ts-jest": "^29.2.3",
