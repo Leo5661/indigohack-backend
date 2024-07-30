@@ -6,6 +6,7 @@ import morgan from 'morgan'
 import cors from 'cors'
 import router from './routes/router'
 import { errorHandler } from './middlewares/errorHandler'
+import { Streamer } from './pulse/streamer'
 
 dotenv.config()
 const app: Express = express()
@@ -21,6 +22,9 @@ app.use(helmet())
 app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
+// run database streamer
+Streamer()
 
 app.get('/', (req: Request, res: Response) => {
     res.status(200)

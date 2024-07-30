@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import authRouter from './auth-router'
+import flightRouter from './flight-status'
 
 const router: Router = Router()
 
@@ -12,6 +13,10 @@ const defaultRoutes: Route[] = [
     {
         path: '/auth',
         route: authRouter,
+    },
+    {
+        path: '/flightstatus',
+        route: flightRouter,
     },
 ]
 

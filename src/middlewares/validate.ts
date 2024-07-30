@@ -4,11 +4,11 @@ import { BadRequestError } from '../exceptions/BadRequestError'
 import { ErrorCode } from '../exceptions/RootError'
 import { pick } from '../lib/pick'
 
-type RequestType = 'params' | 'query' | 'body' | 'clerkId'
+type RequestType = 'params' | 'query' | 'body'
 
 export const validate = (schema: z.ZodSchema): RequestHandler => {
     return (req: Request, res: Response, next: NextFunction) => {
-        const validSchema: z.ZodSchema = pick(schema, ['params', 'query', 'body', 'clerkId'])
+        const validSchema: z.ZodSchema = pick(schema, ['params', 'query', 'body'])
         const object: Partial<Record<RequestType, unknown>> = pick(req, Object.keys(validSchema))
 
         const result = schema.safeParse(req)
